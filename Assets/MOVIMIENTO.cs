@@ -8,6 +8,7 @@ public class Movimiento2D : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 movimiento;
+    private bool mirandoDerecha = true;
 
     void Start()
     {
@@ -29,10 +30,28 @@ public class Movimiento2D : MonoBehaviour
         }
 
         movimiento = new Vector2(entradaX, entradaY).normalized;
+
+        // Comprobación de orientación
+        if (entradaX > 0 && !mirandoDerecha)
+        {
+            Voltear();
+        }
+        else if (entradaX < 0 && mirandoDerecha)
+        {
+            Voltear();
+        }
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movimiento * velocidad * Time.fixedDeltaTime);
+    }
+
+    private void Voltear()
+    {
+        mirandoDerecha = !mirandoDerecha;
+        Vector3 escala = transform.localScale;
+        escala.x *= -1; // Invierte el eje X
+        transform.localScale = escala;
     }
 }
