@@ -8,9 +8,12 @@ public class SaludJugador : MonoBehaviour
     public float vidaActual;
     public Slider barraDeVida;
 
+    [Header("Configuración de UI")]
+    public GameObject textoGameOver; // Arrastra tu texto de UI aquí desde la jerarquía
+
     [Header("Configuración de Daño")]
     [Tooltip("Cantidad de vida que pierde por segundo mientras el enemigo lo toca")]
-    public float danoPorSegundo = 25f; 
+    public float danoPorSegundo = 25f;
 
     void Start()
     {
@@ -21,14 +24,18 @@ public class SaludJugador : MonoBehaviour
             barraDeVida.maxValue = vidaMaxima;
             barraDeVida.value = vidaActual;
         }
+
+        // Asegurarse de que el texto esté oculto al inicio
+        if (textoGameOver != null)
+        {
+            textoGameOver.SetActive(false);
+        }
     }
 
-    // Se ejecuta de manera continua MIENTRAS el enemigo esté en contacto con Juancito
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemigo"))
         {
-            // Resta daño proporcional al tiempo transcurrido en el frame
             RecibirDano(danoPorSegundo * Time.deltaTime);
         }
     }
@@ -52,6 +59,21 @@ public class SaludJugador : MonoBehaviour
     private void Morir()
     {
         Debug.Log("¡Juancito ha muerto!");
-        Destroy(gameObject);
+
+        // Muestra el texto "Te moriste"
+        if (textoGameOver != null)
+        {
+            textoGameOver.SetActive(true);
+        }
+
+        // Desactiva el Sprite y los controles para que no siga moviéndose,
+        // sin destruir el objeto completo para evitar errores de referencias
+        GetComponent<SpriteRenderer>().enabled = false;
+        
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = false;
+
+        MonoBehaviour movimiento = GetComponent("Movimiento2D") as MonoBehaviour;
+        if (movimiento != null) movimiento.enabled = false;
     }
 }
