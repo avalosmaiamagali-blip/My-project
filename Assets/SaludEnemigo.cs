@@ -64,6 +64,25 @@ public class SaludEnemigo : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null) rb.simulated = false;
 
+        // Asegurar que no conserve velocidad y detener otros componentes que puedan moverlo
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.simulated = false;
+        }
+
+        // Desactivar otros Behaviour (IA, scripts de movimiento, etc.) excepto este script
+        var behaviours = GetComponents<Behaviour>();
+        foreach (var b in behaviours)
+        {
+            if (b != this) b.enabled = false;
+        }
+
+        // Desactivar Animator si existe para que las animaciones no muevan el transform
+        Animator animator = GetComponent<Animator>();
+        if (animator != null) animator.enabled = false;
+
         // Ocultar la barra de vida
         if (barraDeVida != null)
         {

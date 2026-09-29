@@ -14,10 +14,22 @@ public class SaludJugador : MonoBehaviour
     [Header("Configuración de Daño")]
     [Tooltip("Cantidad de vida que pierde por segundo mientras el enemigo lo toca")]
     public float danoPorSegundo = 25f;
+    [Header("Cooldown y Sacudida al recibir daño")]
+    [Tooltip("Tiempo mínimo entre daños consecutivos")]
+    public float cooldownRecibirDano = 0.5f;
+    [Tooltip("Duración de la sacudida cuando recibe daño")]
+    public float duracionSacudida = 0.12f;
+    [Tooltip("Fuerza máxima del desplazamiento de la sacudida")]
+    public float fuerzaSacudida = 0.08f;
+
+    private float tiempoUltimoDano = -100f;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
         vidaActual = vidaMaxima;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (barraDeVida != null)
         {
@@ -42,6 +54,13 @@ public class SaludJugador : MonoBehaviour
 
     public void RecibirDano(float cantidad)
     {
+        // Aplicar cooldown para evitar recibir daño demasiado frecuentemente
+        if (Time.time - tiempoUltimoDano < cooldownRecibirDano) return;
+        tiempoUltimoDano = Time.time;
+
+        // Iniciar sacudida visual
+        StartCoroutine(SacudirJugador(duracionSacudida, fuerzaSacudida));
+
         vidaActual -= cantidad;
         vidaActual = Mathf.Clamp(vidaActual, 0, vidaMaxima);
 
@@ -54,6 +73,33 @@ public class SaludJugador : MonoBehaviour
         {
             Morir();
         }
+    }
+
+    // Sacudida simple del transform local para dar feedback al recibir daño
+    private System.Collections.IEnumerator SacudirJugador(float duracion, float fuerza)
+    {
+        Vector3 posicionOriginal = transform.localPosition;
+        float tiempoPasado = 0f;
+        Color colorOriginal = Color.white;
+        if (spriteRenderer != null) colorOriginal = spriteRenderer.color;
+
+        // Cambiar a rojo mientras sacude
+        if (spriteRenderer != null) spriteRenderer.color = Color.red;
+
+        while (tiempoPasado < duracion)
+        {
+            float offsetX = Random.Range(-1f, 1f) * fuerza;
+            float offsetY = Random.Range(-1f, 1f) * (fuerza * 0.6f);
+            transform.localPosition = posicionOriginal + new Vector3(offsetX, offsetY, 0f);
+
+            tiempoPasado += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localPosition = posicionOriginal;
+
+        // Restaurar color original
+        if (spriteRenderer != null) spriteRenderer.color = colorOriginal;
     }
 
     private void Morir()
