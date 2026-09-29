@@ -75,6 +75,18 @@ public class SaludJugador : MonoBehaviour
         }
     }
 
+    // Método público para curar al jugador
+    public void Curar(float cantidad)
+    {
+        vidaActual += cantidad;
+        vidaActual = Mathf.Clamp(vidaActual, 0, vidaMaxima);
+
+        if (barraDeVida != null)
+        {
+            barraDeVida.value = vidaActual;
+        }
+    }
+
     // Sacudida simple del transform local para dar feedback al recibir daño
     private System.Collections.IEnumerator SacudirJugador(float duracion, float fuerza)
     {
