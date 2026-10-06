@@ -18,9 +18,17 @@ public class CombateJugador : MonoBehaviour
     [Header("Tiempo entre Ataques")]
     public float tiempoEntreAtaques = 0.5f;
     private float tiempoSiguienteAtaque = 0f;
+    [HideInInspector]
+    public bool bloqueando = false;
 
     void Update()
     {
+        // Bloqueo: mantener la tecla Q para bloquear
+        if (Keyboard.current != null)
+        {
+            bloqueando = Keyboard.current.qKey.isPressed;
+        }
+
         if (Time.time >= tiempoSiguienteAtaque)
         {
             // Detecta la tecla E
@@ -30,6 +38,16 @@ public class CombateJugador : MonoBehaviour
                 tiempoSiguienteAtaque = Time.time + tiempoEntreAtaques;
             }
         }
+    }
+
+    // Devuelve true si actualmente bloqueando y el enemigo está dentro del area frontal (controladorAtaque)
+    public bool EstaBloqueandoA(Collider2D enemigo)
+    {
+        if (!bloqueando || controladorAtaque == null || enemigo == null) return false;
+
+        // Comprobar distancia entre el punto de bloqueo (controladorAtaque) y el enemigo
+        float distancia = Vector2.Distance(controladorAtaque.position, enemigo.transform.position);
+        return distancia <= radioAtaque;
     }
 
     private void Atacar()

@@ -24,6 +24,7 @@ public class SaludJugador : MonoBehaviour
 
     private float tiempoUltimoDano = -100f;
     private SpriteRenderer spriteRenderer;
+    private CombateJugador combateJugador;
 
     void Start()
     {
@@ -48,7 +49,16 @@ public class SaludJugador : MonoBehaviour
     {
         if (collision.CompareTag("Enemigo"))
         {
-            RecibirDano(danoPorSegundo * Time.deltaTime);
+            float cantidad = danoPorSegundo * Time.deltaTime;
+
+            // Si el jugador está bloqueando y el enemigo está dentro de la zona frontal del bloqueo,
+            // reducir el daño al 10% (suprimir 90%).
+            if (combateJugador != null && combateJugador.EstaBloqueandoA(collision))
+            {
+                cantidad *= 0.1f; // recibe solo el 10% del daño
+            }
+
+            RecibirDano(cantidad);
         }
     }
 

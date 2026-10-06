@@ -13,6 +13,14 @@ public class Movimiento2D : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        // Asegurar que el Rigidbody2D use física para colisiones con BoxCollider2D
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.simulated = true;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+            rb.sharedMaterial = rb.sharedMaterial; // no-op para evitar advertencias si no hay material
+        }
     }
 
     void Update()
@@ -44,7 +52,11 @@ public class Movimiento2D : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movimiento * velocidad * Time.fixedDeltaTime);
+        // Usar velocidad física para que las colisiones se resuelvan correctamente
+        if (rb != null)
+        {
+            rb.linearVelocity = movimiento * velocidad;
+        }
     }
 
     private void Voltear()

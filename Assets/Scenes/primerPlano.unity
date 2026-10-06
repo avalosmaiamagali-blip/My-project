@@ -946,7 +946,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1487,11 +1487,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 507bed1d09a0c2e48a3afbc603efe7e0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.7022958
+      value: 2.703917
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 507bed1d09a0c2e48a3afbc603efe7e0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.7646161
+      value: 1.7732652
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 507bed1d09a0c2e48a3afbc603efe7e0, type: 3}
       propertyPath: m_LocalScale.z
@@ -1499,11 +1499,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 507bed1d09a0c2e48a3afbc603efe7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0066
+      value: -0.00049
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 507bed1d09a0c2e48a3afbc603efe7e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.9507
+      value: -4.99938
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 507bed1d09a0c2e48a3afbc603efe7e0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1852,7 +1852,7 @@ Transform:
   m_GameObject: {fileID: 2142694012}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.14, y: -0.46, z: -0.66}
+  m_LocalPosition: {x: 0.14, y: 0.2, z: -0.66}
   m_LocalScale: {x: 22, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
