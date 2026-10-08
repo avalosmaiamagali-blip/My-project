@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c2ab03fca2413b64581e7cf3c583b779
+guid: 49f3df2d6cdafc742ad9924b1ca1a0aa
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -125,9 +125,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Sprite-0001
+  - name: Juancito Golpe 2
     originalName: 
-    pivot: {x: 0.53125, y: 0}
+    pivot: {x: 0.4754098, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -135,9 +135,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 32
+      width: 61
       height: 64
-    spriteID: 7b40935bfc1cb6c469ebd78fa2ae3b6f
+    spriteID: 2cfb083ddd233de48b582ae0d9ab7530
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -151,25 +151,25 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 4228612825
+      value0: 1202161658
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: Sprite-0001
+    name: Juancito Golpe 2
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Sprite-0001
+    - name: Juancito Golpe 2
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 15
+        x: 3
         y: 0
-        width: 32
+        width: 61
         height: 64
-      spriteId: 7b40935bfc1cb6c469ebd78fa2ae3b6f
+      spriteId: 2cfb083ddd233de48b582ae0d9ab7530
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -178,5 +178,5 @@ ScriptedImporter:
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
-  previousTextureSize: {x: 64, y: 128}
+  previousTextureSize: {x: 128, y: 128}
   canvasSize: {x: 64, y: 64}
